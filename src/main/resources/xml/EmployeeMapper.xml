@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myzg.gymnasium.mapper.EmployeeMapper">
+
+    <resultMap id="EmployeeFull" type="com.myzg.gymnasium.entity.Employee">
+        <id column="o_id" property="oId"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday"/>
+        <result column="ID_number" property="idNumber"/>
+        <result column="marital_status" property="maritalStatus"/>
+        <result column="nation_id" property="nationId"/>
+        <result property="politicsStatus" column="politics_status"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="adress" property="adress"/>
+        <result column="branch_id" property="branchId"/>
+        <result column="position_id" property="positionId"/>
+        <result column="basic_salary" property="basicSalary"/>
+        <result column="hire_type" property="hireType"/>
+        <result column="education" property="education"/>
+        <result column="school" property="school"/>
+        <result column="major" property="major"/>
+        <result column="hire_time" property="hireTime"/>
+        <result column="work_status" property="workStatus"/>
+        <result column="dimission_time" property="dimissionTime"/>
+        <result column="pact_start" property="pactStart"/>
+        <result column="pact_end" property="pactEnd"/>
+        <result column="work_age" property="workAge"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <association property="nation" javaType="com.myzg.gymnasium.entity.Nation"
+                     select="com.myzg.gymnasium.mapper.NationMapper.getNationById"
+                     column="nation_id">
+            <id column="n_id" property="nId"/>
+            <result column="named" property="named"/>
+        </association>
+        <association property="postnamed" javaType="com.myzg.gymnasium.entity.Postnamed"
+                     select="com.myzg.gymnasium.mapper.PostnamedMapper.getPostnamedById"
+                     column="position_id">
+            <id column="t_id" property="tId"/>
+            <result column="named" property="named"/>
+            <result column="branch_id" property="branchId"/>
+        </association>
+        <association property="branch" javaType="com.myzg.gymnasium.entity.Branch"
+                     select="com.myzg.gymnasium.mapper.BranchMapper.getBranchById"
+                     column="branch_id">
+            <id column="t_id" property="tId"/>
+            <result column="named" property="named"/>
+        </association>
+     </resultMap>
+
+    <select id="findEmployeeById" resultMap="EmployeeFull" parameterType="int">
+        select * from employee where employee.o_id = #{id}
+    </select>
+
+    <select id="findEmployeeByPage" resultMap="EmployeeFull" >
+        select * from employee limit #{page},#{limit}
+    </select>
+
+</mapper>

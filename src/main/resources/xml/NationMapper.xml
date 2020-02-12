@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myzg.gymnasium.mapper.NationMapper">
+
+    <select id="getNationById" parameterType="int" resultType="com.myzg.gymnasium.entity.Nation">
+        select * from nation where n_id = #{id}
+    </select>
+
+    <select id="getAllNation" resultType="com.myzg.gymnasium.entity.Nation">
+        select * from nation
+    </select>
+
+</mapper>

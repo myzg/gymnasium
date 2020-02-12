@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myzg.gymnasium.mapper.PostnamedMapper">
+
+
+    <select id="getPostnamedById" parameterType="int" resultType="com.myzg.gymnasium.entity.Postnamed">
+        select * from postnamed where t_id = #{id}
+    </select>
+
+    <select id="getAllPostname" parameterType="int" resultType="com.myzg.gymnasium.entity.Postnamed">
+        select * from postnamed
+    </select>
+
+
+</mapper>
