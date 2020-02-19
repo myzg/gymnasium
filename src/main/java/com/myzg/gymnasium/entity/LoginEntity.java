@@ -1,11 +1,10 @@
 package com.myzg.gymnasium.entity;
-
-
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
-
 @Data
 @Accessors(chain = true)
 public class LoginEntity {
@@ -15,5 +14,7 @@ public class LoginEntity {
 
     @NotBlank
     private String password;
+
+
 
 }

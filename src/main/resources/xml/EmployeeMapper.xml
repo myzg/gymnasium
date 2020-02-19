@@ -58,4 +58,52 @@
         select * from employee limit #{page},#{limit}
     </select>
 
+    <select id="findEmployeeByFuzzyQuery" resultMap="EmployeeFull">
+        select * from employee
+        <trim prefix="where" prefixOverrides="and">
+            <if test='requestParams.name != null and  requestParams.name != ""'>
+                and name = #{requestParams.name}
+            </if>
+            <if test='requestParams.phone != null and requestParams.phone != ""'>
+                and phone = #{requestParams.phone}
+            </if>
+            <if test='requestParams.gender != null and requestParams.gender != ""'>
+                and sex = #{requestParams.gender}
+            </if>
+            <if test='requestParams.idNumber != null and requestParams.idNumber != ""'>
+                and ID_number = #{requestParams.idNumber}
+            </if>
+            <if test="requestParams.branchId != null">
+                and branch_id = #{requestParams.branchId}
+            </if>
+            <if test="requestParams.positionId != null">
+                and position_id = #{requestParams.positionId}
+            </if>
+        </trim>
+    </select>
+
+    <select id="findEmployeeByFuzzyQueryForCount" resultType="int">
+        select count(*) from employee
+        <trim prefix="where" prefixOverrides="and">
+            <if test='requestParams.name != null and  requestParams.name != ""'>
+                and name = #{requestParams.name}
+            </if>
+            <if test='requestParams.phone != null and requestParams.phone != ""'>
+                and phone = #{requestParams.phone}
+            </if>
+            <if test='requestParams.gender != null and requestParams.gender != ""'>
+                and sex = #{requestParams.gender}
+            </if>
+            <if test='requestParams.idNumber != null and requestParams.idNumber != ""'>
+                and ID_number = #{requestParams.idNumber}
+            </if>
+            <if test="requestParams.branchId != null">
+                and branch_id = #{requestParams.branchId}
+            </if>
+            <if test="requestParams.positionId != null">
+                and position_id = #{requestParams.positionId}
+            </if>
+        </trim>
+    </select>
+
 </mapper>

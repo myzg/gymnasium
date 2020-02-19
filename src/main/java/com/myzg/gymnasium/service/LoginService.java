@@ -45,7 +45,7 @@ public class LoginService {
 
     public ResponseBody getUserMessageByToken(String token) {
         String userName = jwtUtils.getUserNameFromToken(token);
-        if(userName != null){
+        if(userName != null) {
             return ResponseBody.OK(new LoginEntity().setUserName(employeeService.getById(Integer.parseInt(userName)).getName()));
         }
         throw new ProgramException(ErrorEnum.ILLEGAL_ARGS,"token 错误请检查token");

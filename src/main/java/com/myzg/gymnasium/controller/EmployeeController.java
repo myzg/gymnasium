@@ -7,9 +7,12 @@ import com.myzg.gymnasium.exception.ErrorEnum;
 import com.myzg.gymnasium.exception.ProgramException;
 import com.myzg.gymnasium.responsebody.ResponseBody;
 import com.myzg.gymnasium.service.impl.EmployeeServiceImpl;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -29,6 +32,17 @@ public class EmployeeController {
     @GetMapping
     public ResponseBody getTotalForEmployee() {
         return ResponseBody.OK(employeeService.getBaseMapper().selectCount(null));
+    }
+
+    @GetMapping(params = "fuzzyTotal")
+    public ResponseBody getTotalForEmployeeByFuzzyQuery(@RequestParam Map<String,Object> map){
+        return employeeService.findEmployeeByFuzzyQueryForCount(map);
+    }
+
+    @GetMapping(params = {"type","page","limit"})
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_BOSS')")
+    public ResponseBody getEmployeeByFuzzyQuery(@RequestParam Map<String,Object> map) {
+        return employeeService.findEmployeeByFuzzyQuery(map);
     }
 
     @GetMapping(params = "id")
